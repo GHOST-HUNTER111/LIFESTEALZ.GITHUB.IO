@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Donut SMP Lifesteal Event</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lifestealz SMP</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
 
 <style>
 
@@ -13,76 +13,183 @@
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family:'Press Start 2P', cursive;
+font-family:'Montserrat',sans-serif;
 }
 
 body{
-overflow:hidden;
-background:black;
+background:#0f1115;
 color:white;
-text-align:center;
+overflow-x:hidden;
 }
 
-/* canvas background */
+/* animated gradient background */
 
-#bg{
+body::before{
+content:"";
 position:fixed;
-top:0;
-left:0;
+width:200%;
+height:200%;
+background:radial-gradient(circle at 30% 30%, #1f8cff33, transparent),
+radial-gradient(circle at 70% 70%, #00ffb233, transparent);
+animation:move 15s infinite linear;
 z-index:-1;
 }
 
-/* main container */
-
-.container{
-position:absolute;
-top:50%;
-left:50%;
-transform:translate(-50%,-50%);
-padding:40px;
-background:rgba(0,0,0,0.6);
-border:3px solid #00ff9d;
-border-radius:12px;
-backdrop-filter: blur(6px);
+@keyframes move{
+0%{transform:translate(0,0)}
+50%{transform:translate(-10%, -10%)}
+100%{transform:translate(0,0)}
 }
 
-h1{
-font-size:28px;
-color:#00ff9d;
-margin-bottom:20px;
-text-shadow:0 0 15px #00ff9d;
+/* header */
+
+header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:25px 8%;
 }
 
-p{
-font-size:12px;
-line-height:1.8;
-margin-bottom:25px;
+.logo{
+font-size:22px;
+font-weight:800;
+color:#3da9ff;
 }
 
-/* button */
-
-.joinBtn{
-display:inline-block;
-padding:18px 35px;
-background:#00ff9d;
-color:black;
+nav a{
+margin-left:25px;
 text-decoration:none;
+color:#aaa;
+font-weight:600;
+transition:.2s;
+}
+
+nav a:hover{
+color:white;
+}
+
+/* hero */
+
+.hero{
+height:80vh;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+text-align:center;
+padding:20px;
+}
+
+.hero h1{
+font-size:60px;
+font-weight:800;
+margin-bottom:15px;
+}
+
+.hero p{
+max-width:650px;
+color:#bbb;
+line-height:1.6;
+margin-bottom:30px;
+}
+
+/* buttons */
+
+.buttons{
+display:flex;
+gap:15px;
+flex-wrap:wrap;
+justify-content:center;
+}
+
+.btn{
+padding:14px 28px;
 border-radius:8px;
-font-size:12px;
-transition:all .25s;
-box-shadow:0 0 15px #00ff9d;
+font-weight:600;
+text-decoration:none;
+transition:.2s;
 }
 
-.joinBtn:hover{
-transform:scale(1.1);
-background:#00ffaa;
-box-shadow:0 0 30px #00ffaa;
+.primary{
+background:#3da9ff;
+color:white;
 }
 
-.prize{
-color:#ffd700;
+.primary:hover{
+background:#2c8ce0;
+}
+
+.secondary{
+border:2px solid #3da9ff;
+color:#3da9ff;
+}
+
+.secondary:hover{
+background:#3da9ff;
+color:white;
+}
+
+/* server ip */
+
+.server{
+margin-top:35px;
+background:#151922;
+padding:18px 30px;
+border-radius:8px;
+display:inline-flex;
+align-items:center;
+gap:15px;
+}
+
+.ip{
+font-weight:600;
+color:#3da9ff;
+}
+
+.copy{
+cursor:pointer;
+padding:6px 12px;
+background:#3da9ff;
+border-radius:6px;
+font-size:13px;
+}
+
+/* features */
+
+.features{
+padding:80px 10%;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:30px;
+}
+
+.feature{
+background:#151922;
+padding:30px;
+border-radius:10px;
+transition:.2s;
+}
+
+.feature:hover{
+transform:translateY(-5px);
+}
+
+.feature h3{
+margin-bottom:10px;
+}
+
+.feature p{
+color:#aaa;
 font-size:14px;
-margin-top:10px;
+}
+
+/* footer */
+
+footer{
+text-align:center;
+padding:40px;
+color:#777;
+font-size:14px;
 }
 
 </style>
@@ -90,146 +197,85 @@ margin-top:10px;
 
 <body>
 
-<canvas id="bg"></canvas>
+<header>
 
-<div class="container">
+<div class="logo">LIFESTEALZ</div>
 
-<h1>DONUT SMP</h1>
+<nav>
+<a href="#">Home</a>
+<a href="#">Features</a>
+<a href="#">Discord</a>
+</nav>
+
+</header>
+
+<section class="hero">
+
+<h1>Lifestealz SMP</h1>
 
 <p>
-🔥 LIFESTEAL EVENT 🔥<br><br>
-Fight players.<br>
-Steal hearts.<br>
-Become the strongest.<br><br>
-
-Compete for the ultimate prize.
+The ultimate Minecraft Lifesteal experience.
+Fight players, steal hearts, build alliances, and dominate the server.
+Only the strongest survive.
 </p>
 
-<div class="prize">
-💰 HUGE CASH PRIZE 💰
-</div>
+<div class="buttons">
 
-<br><br>
-
-<a id="joinButton" class="joinBtn" href="https://your-link-here.com">
-JOIN THE SERVER
-</a>
+<a class="btn primary" id="joinBtn" href="#">Join Discord</a>
+<a class="btn secondary" href="#">Vote</a>
 
 </div>
+
+<div class="server">
+
+<span>Server IP:</span>
+
+<span class="ip" id="ip">play.lifestealz.net</span>
+
+<div class="copy" onclick="copyIP()">Copy</div>
+
+</div>
+
+</section>
+
+<section class="features">
+
+<div class="feature">
+<h3>Lifesteal PvP</h3>
+<p>Eliminate players to steal their hearts and become stronger.</p>
+</div>
+
+<div class="feature">
+<h3>Active Community</h3>
+<p>Play with a competitive and active community every day.</p>
+</div>
+
+<div class="feature">
+<h3>Custom Features</h3>
+<p>Unique plugins and balanced gameplay designed for competitive players.</p>
+</div>
+
+<div class="feature">
+<h3>Events</h3>
+<p>Frequent server events and competitions with rewards.</p>
+</div>
+
+</section>
+
+<footer>
+© 2026 Lifestealz SMP
+</footer>
 
 <script>
 
-/* CONFIGURABLE LINK */
+const DISCORD_LINK = "https://discord.gg/YOURINVITE";
+document.getElementById("joinBtn").href = DISCORD_LINK;
 
-const customLink = "https://your-link-here.com";
-document.getElementById("joinButton").href = customLink;
-
-/* background particles */
-
-const canvas = document.getElementById("bg");
-const ctx = canvas.getContext("2d");
-
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-
-let particles = [];
-
-class Particle{
-constructor(){
-this.x = Math.random()*canvas.width;
-this.y = Math.random()*canvas.height;
-this.size = Math.random()*3+1;
-this.speedX = Math.random()*1-0.5;
-this.speedY = Math.random()*1-0.5;
+function copyIP(){
+const ip = document.getElementById("ip").innerText;
+navigator.clipboard.writeText(ip);
+alert("Server IP copied!");
 }
-
-update(){
-this.x += this.speedX;
-this.y += this.speedY;
-
-if(this.x < 0 || this.x > canvas.width) this.speedX *= -1;
-if(this.y < 0 || this.y > canvas.height) this.speedY *= -1;
-}
-
-draw(){
-ctx.fillStyle = "#00ff9d";
-ctx.beginPath();
-ctx.arc(this.x,this.y,this.size,0,Math.PI*2);
-ctx.fill();
-}
-}
-
-function init(){
-for(let i=0;i<120;i++){
-particles.push(new Particle());
-}
-}
-
-function animate(){
-ctx.clearRect(0,0,canvas.width,canvas.height);
-
-particles.forEach(p=>{
-p.update();
-p.draw();
-});
-
-connect();
-
-requestAnimationFrame(animate);
-}
-
-function connect(){
-for(let a=0;a<particles.length;a++){
-for(let b=a;b<particles.length;b++){
-
-let dx = particles[a].x - particles[b].x;
-let dy = particles[a].y - particles[b].y;
-let distance = dx*dx + dy*dy;
-
-if(distance < 9000){
-ctx.strokeStyle="rgba(0,255,157,0.1)";
-ctx.lineWidth=1;
-ctx.beginPath();
-ctx.moveTo(particles[a].x,particles[a].y);
-ctx.lineTo(particles[b].x,particles[b].y);
-ctx.stroke();
-}
-
-}
-}
-}
-
-/* mouse interaction */
-
-let mouse = {
-x:null,
-y:null
-}
-
-window.addEventListener("mousemove",(event)=>{
-mouse.x = event.x;
-mouse.y = event.y;
-
-particles.forEach(p=>{
-let dx = p.x - mouse.x;
-let dy = p.y - mouse.y;
-let dist = Math.sqrt(dx*dx+dy*dy);
-
-if(dist < 120){
-p.x += dx/10;
-p.y += dy/10;
-}
-});
-
-});
-
-window.addEventListener("resize",()=>{
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-});
-
-init();
-animate();
 
 </script>
 
