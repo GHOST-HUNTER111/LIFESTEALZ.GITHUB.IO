@@ -19,7 +19,7 @@
 body{
   background:#0f1115;
   color:white;
-  overflow-x:hidden;
+  overflow:hidden; /* prevents scrolling on all devices */
 }
 
 /* INTERACTIVE MOUSE-TRACKING GRADIENT */
@@ -64,6 +64,237 @@ nav{
 }
 
 nav a{
+  text-decoration:none;
+  color:#aaa;
+  font-weight:600;
+  transition:.2s;
+}
+
+nav a:hover{
+  color:white;
+}
+
+/* MOBILE MENU BUTTON */
+.menu-btn{
+  display:none;
+  font-size:28px;
+  cursor:pointer;
+  color:white;
+}
+
+/* MOBILE NAV (hidden by default) */
+.mobile-nav{
+  display:none;
+  flex-direction:column;
+  background:#151922;
+  padding:20px;
+  position:absolute;
+  top:80px;
+  right:8%;
+  width:200px;
+  border-radius:10px;
+}
+
+.mobile-nav a{
+  padding:10px 0;
+  color:#ccc;
+  text-decoration:none;
+  font-weight:600;
+}
+
+.mobile-nav a:hover{
+  color:white;
+}
+
+/* HERO */
+
+.hero{
+  height:calc(100vh - 120px); /* fills screen minus header/footer */
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:20px;
+}
+
+.hero h1{
+  font-size:60px;
+  font-weight:800;
+  margin-bottom:15px;
+}
+
+.hero p{
+  max-width:650px;
+  color:#bbb;
+  line-height:1.6;
+  margin-bottom:30px;
+}
+
+/* BUTTONS */
+
+.buttons{
+  display:flex;
+  gap:15px;
+  flex-wrap:wrap;
+  justify-content:center;
+}
+
+.btn{
+  padding:14px 28px;
+  border-radius:8px;
+  font-weight:600;
+  text-decoration:none;
+  transition:.2s;
+}
+
+.primary{
+  background:#3da9ff;
+  color:white;
+}
+
+.primary:hover{
+  background:#2c8ce0;
+}
+
+.secondary{
+  border:2px solid #3da9ff;
+  color:#3da9ff;
+}
+
+.secondary:hover{
+  background:#3da9ff;
+  color:white;
+}
+
+/* FOOTER */
+
+footer{
+  text-align:center;
+  padding:20px;
+  color:#777;
+  font-size:14px;
+}
+
+/* ----------------------------- */
+/* 📱 MOBILE RESPONSIVE SECTION */
+/* ----------------------------- */
+
+@media (max-width: 768px){
+
+  header{
+    padding:20px 6%;
+  }
+
+  nav{
+    display:none; /* hide desktop nav */
+  }
+
+  .menu-btn{
+    display:block; /* show hamburger */
+  }
+
+  .hero h1{
+    font-size:36px;
+  }
+
+  .hero p{
+    font-size:15px;
+    padding:0 10px;
+  }
+
+  .btn{
+    padding:16px 32px;
+    font-size:16px;
+  }
+}
+
+@media (max-width: 480px){
+
+  .hero h1{
+    font-size:30px;
+  }
+
+  .hero p{
+    font-size:14px;
+  }
+
+  .btn{
+    width:100%;
+    text-align:center;
+  }
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+
+<div class="logo">LIFESTEALZ</div>
+
+<div class="menu-btn" onclick="toggleMenu()">☰</div>
+
+<nav>
+  <a href="index.html">Home</a>
+  <a href="rules.html">Rules</a>
+  <a href="forms.html">Forms</a>
+</nav>
+
+<div class="mobile-nav" id="mobileNav">
+  <a href="index.html">Home</a>
+  <a href="rules.html">Rules</a>
+  <a href="forms.html">Forms</a>
+</div>
+
+</header>
+
+<section class="hero">
+
+<h1>Lifestealz SMP</h1>
+
+<p>
+The ultimate Minecraft Lifesteal experience.
+Fight players, steal hearts, build alliances, and dominate the server.
+Only the strongest survive.
+</p>
+
+<div class="buttons">
+  <a class="btn primary" href="rules.html">Rules</a>
+  <a class="btn secondary" href="forms.html">Form</a>
+</div>
+
+</section>
+
+<footer>
+© 2026 Lifestealz SMP
+</footer>
+
+<!-- MOUSE TRACKING SCRIPT -->
+<script>
+document.addEventListener("mousemove", (e) => {
+  const x = (e.clientX / window.innerWidth) * 100;
+  const y = (e.clientY / window.innerHeight) * 100;
+
+  document.body.style.setProperty("--x", x + "%");
+  document.body.style.setProperty("--y", y + "%");
+});
+
+document.addEventListener("mouseleave", () => {
+  document.body.style.setProperty("--x", "50%");
+  document.body.style.setProperty("--y", "50%");
+});
+
+/* MOBILE MENU TOGGLE */
+function toggleMenu(){
+  const nav = document.getElementById("mobileNav");
+  nav.style.display = nav.style.display === "flex" ? "none" : "flex";
+}
+</script>
+
+</body>
+</html>nav a{
   text-decoration:none;
   color:#aaa;
   font-weight:600;
