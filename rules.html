@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Lifestealz Book</title>
+
+<link href="https://fonts.cdnfonts.com/css/minecraft-4" rel="stylesheet">
+
+<style>
+
+body{
+background:#2b2b2b;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+font-family:'Minecraft', monospace;
+}
+
+.book{
+width:420px;
+height:300px;
+background:#c6b48a;
+border:6px solid #6b5b3c;
+border-radius:8px;
+position:relative;
+box-shadow:0 0 20px #000;
+display:flex;
+flex-direction:column;
+}
+
+.page{
+flex:1;
+padding:20px;
+overflow-y:auto;
+color:#000;
+font-size:14px;
+line-height:1.4;
+white-space:pre-wrap;
+}
+
+.controls{
+display:flex;
+justify-content:space-between;
+padding:8px;
+background:#b3a077;
+border-top:4px solid #6b5b3c;
+}
+
+button{
+font-family:'Minecraft', monospace;
+padding:5px 12px;
+background:#8b7a52;
+border:2px solid #4e432b;
+cursor:pointer;
+}
+
+button:hover{
+background:#a8925f;
+}
+
+.gold{color:#ffaa00;}
+.red{color:#ff5555;}
+.darkred{color:#aa0000;}
+.gray{color:#555555;}
+.aqua{color:#55ffff;}
+.green{color:#55ff55;}
+.purple{color:#ff55ff;}
+
+.title{
+font-weight:bold;
+}
+
+</style>
+</head>
+<body>
+
+<div class="book">
+
+<div id="page" class="page"></div>
+
+<div class="controls">
+<button onclick="prev()">◀</button>
+<div id="pageNum">1 / 1</div>
+<button onclick="next()">▶</button>
+</div>
+
+</div>
+
+<script>
+
+const pages = [
+
+`<span class="gold title">LIFESTEALZ-A SURVIVAL GUIDE</span>
+
+<span class="gray">
+Welcome to the official Lifestealz-A SMP.
+This guide explains rules, features, and how to win the season.
+</span>`,
+
+`<span class="red title">RULES - CONDUCT</span>
+
+<span class="gray">
+- No bullying or harassment
+- No hate speech or slurs
+- No threats or doxxing
+- Respect players even in PvP
+</span>`,
+
+`<span class="darkred title">PVP RULES</span>
+
+<span class="gray">
+Allowed:
+- Griefing
+- Stealing
+- Raiding
+- PvP outside spawn
+
+Not allowed:
+- Spawn killing
+- Portal traps
+- Hacked clients
+- Duping
+</span>`,
+
+`<span class="red title">CHAT RULES</span>
+
+<span class="gray">
+- No spam
+- No impersonating staff
+- No extreme toxicity
+- No inappropriate names
+</span>`,
+
+`<span class="darkred title">IMAGEFRAME RULES</span>
+
+<span class="gray">
+Banned:
+- NSFW
+- Gore
+- Hate symbols
+- Crime images
+
+Violations may result in ban.
+</span>`,
+
+`<span class="aqua title">LIFESTEALZ</span>
+
+<span class="gray">
+- Lose hearts when you die
+- Gain hearts from PvP
+
+Commands:
+- /withdrawheart
+- /hearts <player>
+- /lifestealz recipe <item>
+</span>`,
+
+`<span class="aqua title">FEATURES</span>
+
+<span class="gray">
+Veinminer
+AutoTreeChop
+Custom Enchants
+Events
+</span>`,
+
+`<span class="aqua title">SLEEP SYSTEM</span>
+
+<span class="gray">
+25% sleeping skips night
+</span>`,
+
+`<span class="aqua title">TPA SYSTEM</span>
+
+<span class="gray">
+/tpa
+/tpaccept
+/tpdeny
+</span>`,
+
+`<span class="aqua title">TEAMS</span>
+
+<span class="gray">
+/team create
+/team invite
+Max 3 players
+</span>`,
+
+`<span class="purple title">VOICE CHAT</span>
+
+<span class="gray">
+Proximity voice chat supported
+</span>`,
+
+`<span class="gold title">THE GOAL</span>
+
+<span class="gray">
+Defeat the Ender Dragon first
+</span>`,
+
+`<span class="gold title">WORLD UNLOCKS</span>
+
+<span class="gray">
+Day 0-15
+Overworld only
+
+Day 15
+Nether unlocks
+
+Day 30
+End unlocks
+</span>`,
+
+`<span class="gold title">STRATEGY</span>
+
+<span class="gray">
+Gear up fast
+Hide base
+Farm hearts
+Prepare early
+</span>`,
+
+`<span class="green title">FINAL NOTES</span>
+
+<span class="gray">
+Play fair
+Respect players
+Follow the rules
+</span>`
+
+];
+
+let index = 0;
+
+function render(){
+document.getElementById("page").innerHTML = pages[index];
+document.getElementById("pageNum").innerText =
+(index+1)+" / "+pages.length;
+}
+
+function next(){
+if(index < pages.length-1){
+index++;
+render();
+}
+}
+
+function prev(){
+if(index > 0){
+index--;
+render();
+}
+}
+
+render();
+
+</script>
+
+</body>
+</html>
