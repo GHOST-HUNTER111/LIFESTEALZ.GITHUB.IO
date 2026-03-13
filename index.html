@@ -41,13 +41,14 @@ body::before {
   transition: background-position 0.15s ease-out;
 }
 
-/* header */
+/* HEADER */
 
 header{
   display:flex;
   justify-content:space-between;
   align-items:center;
   padding:25px 8%;
+  position:relative;
 }
 
 .logo{
@@ -56,8 +57,13 @@ header{
   color:#3da9ff;
 }
 
+/* DESKTOP NAV */
+nav{
+  display:flex;
+  gap:25px;
+}
+
 nav a{
-  margin-left:25px;
   text-decoration:none;
   color:#aaa;
   font-weight:600;
@@ -68,7 +74,39 @@ nav a:hover{
   color:white;
 }
 
-/* hero */
+/* MOBILE MENU BUTTON */
+.menu-btn{
+  display:none;
+  font-size:28px;
+  cursor:pointer;
+  color:white;
+}
+
+/* MOBILE NAV (hidden by default) */
+.mobile-nav{
+  display:none;
+  flex-direction:column;
+  background:#151922;
+  padding:20px;
+  position:absolute;
+  top:80px;
+  right:8%;
+  width:200px;
+  border-radius:10px;
+}
+
+.mobile-nav a{
+  padding:10px 0;
+  color:#ccc;
+  text-decoration:none;
+  font-weight:600;
+}
+
+.mobile-nav a:hover{
+  color:white;
+}
+
+/* HERO */
 
 .hero{
   height:80vh;
@@ -93,7 +131,7 @@ nav a:hover{
   margin-bottom:30px;
 }
 
-/* buttons */
+/* BUTTONS */
 
 .buttons{
   display:flex;
@@ -129,7 +167,7 @@ nav a:hover{
   color:white;
 }
 
-/* features */
+/* FEATURES */
 
 .features{
   padding:80px 10%;
@@ -158,13 +196,70 @@ nav a:hover{
   font-size:14px;
 }
 
-/* footer */
+/* FOOTER */
 
 footer{
   text-align:center;
   padding:40px;
   color:#777;
   font-size:14px;
+}
+
+/* ----------------------------- */
+/* 📱 MOBILE RESPONSIVE SECTION */
+/* ----------------------------- */
+
+@media (max-width: 768px){
+
+  header{
+    padding:20px 6%;
+  }
+
+  nav{
+    display:none; /* hide desktop nav */
+  }
+
+  .menu-btn{
+    display:block; /* show hamburger */
+  }
+
+  .hero h1{
+    font-size:36px;
+  }
+
+  .hero p{
+    font-size:15px;
+    padding:0 10px;
+  }
+
+  .btn{
+    padding:16px 32px;
+    font-size:16px;
+  }
+
+  .features{
+    padding:50px 6%;
+  }
+}
+
+@media (max-width: 480px){
+
+  .hero h1{
+    font-size:30px;
+  }
+
+  .hero p{
+    font-size:14px;
+  }
+
+  .btn{
+    width:100%;
+    text-align:center;
+  }
+
+  .feature{
+    padding:20px;
+  }
 }
 
 </style>
@@ -176,11 +271,19 @@ footer{
 
 <div class="logo">LIFESTEALZ</div>
 
+<div class="menu-btn" onclick="toggleMenu()">☰</div>
+
 <nav>
   <a href="index.html">Home</a>
   <a href="rules.html">Rules</a>
   <a href="forms.html">Forms</a>
 </nav>
+
+<div class="mobile-nav" id="mobileNav">
+  <a href="index.html">Home</a>
+  <a href="rules.html">Rules</a>
+  <a href="forms.html">Forms</a>
+</div>
 
 </header>
 
@@ -239,11 +342,16 @@ document.addEventListener("mousemove", (e) => {
   document.body.style.setProperty("--y", y + "%");
 });
 
-// Reset to center when mouse leaves window
 document.addEventListener("mouseleave", () => {
   document.body.style.setProperty("--x", "50%");
   document.body.style.setProperty("--y", "50%");
 });
+
+/* MOBILE MENU TOGGLE */
+function toggleMenu(){
+  const nav = document.getElementById("mobileNav");
+  nav.style.display = nav.style.display === "flex" ? "none" : "flex";
+}
 </script>
 
 </body>
