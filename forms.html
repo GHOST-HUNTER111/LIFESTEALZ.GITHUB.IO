@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <title>Lifestealz Form</title>
+
   <style>
     html, body {
       margin: 0;
@@ -10,13 +11,35 @@
       height: 100%;
       width: 100%;
       overflow: hidden;
+      font-family: 'Minecraft', monospace;
     }
+
     iframe {
       border: 0;
       width: 100%;
       height: 100%;
     }
+
+    /* Back Button */
+    .back-btn {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      padding: 8px 14px;
+      background: #8b7a52;
+      border: 3px solid #4e432b;
+      color: white;
+      font-family: 'Minecraft', monospace;
+      text-decoration: none;
+      cursor: pointer;
+      z-index: 9999;
+    }
+
+    .back-btn:hover {
+      background: #a8925f;
+    }
   </style>
+
   <script>
     // Disable right click
     document.addEventListener('contextmenu', function (e) {
@@ -24,7 +47,12 @@
     });
   </script>
 </head>
+
 <body>
+
+  <!-- BACK TO HOME BUTTON -->
+  <a href="index.html" class="back-btn">⬅ HOME</a>
+
   <iframe
     src="https://docs.google.com/forms/d/e/1FAIpQLSdgo3uYP_ITew95JZIE2xzfGiOw7NTlzQ-jzbeLcDpOsTRfgw/viewform?embedded=true"
     frameborder="0"
@@ -33,5 +61,6 @@
   >
     Loading…
   </iframe>
+
 </body>
 </html>
