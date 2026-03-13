@@ -129,31 +129,6 @@ background:#3da9ff;
 color:white;
 }
 
-/* server ip */
-
-.server{
-margin-top:35px;
-background:#151922;
-padding:18px 30px;
-border-radius:8px;
-display:inline-flex;
-align-items:center;
-gap:15px;
-}
-
-.ip{
-font-weight:600;
-color:#3da9ff;
-}
-
-.copy{
-cursor:pointer;
-padding:6px 12px;
-background:#3da9ff;
-border-radius:6px;
-font-size:13px;
-}
-
 /* features */
 
 .features{
@@ -202,9 +177,10 @@ font-size:14px;
 <div class="logo">LIFESTEALZ</div>
 
 <nav>
-<a href="#">Home</a>
-<a href="#">Features</a>
-<a href="#">Discord</a>
+<a href="home.html">Home</a>
+<a href="features.html">Features</a>
+<a href="rules.html">Rules</a>
+<a href="forms.html">Forms</a>
 </nav>
 
 </header>
@@ -221,18 +197,9 @@ Only the strongest survive.
 
 <div class="buttons">
 
-<a class="btn primary" id="joinBtn" href="#">Join Discord</a>
-<a class="btn secondary" href="#">Vote</a>
-
-</div>
-
-<div class="server">
-
-<span>Server IP:</span>
-
-<span class="ip" id="ip">play.lifestealz.net</span>
-
-<div class="copy" onclick="copyIP()">Copy</div>
+<a class="btn primary" href="rules.html">Rules</a>
+<a class="btn secondary" href="forms.html">Forms</a>
+<a class="btn secondary" href="vote.html">Vote</a>
 
 </div>
 
@@ -265,19 +232,6 @@ Only the strongest survive.
 <footer>
 © 2026 Lifestealz SMP
 </footer>
-
-<script>
-
-const DISCORD_LINK = "https://discord.gg/YOURINVITE";
-document.getElementById("joinBtn").href = DISCORD_LINK;
-
-function copyIP(){
-const ip = document.getElementById("ip").innerText;
-navigator.clipboard.writeText(ip);
-alert("Server IP copied!");
-}
-
-</script>
 
 </body>
 </html>
