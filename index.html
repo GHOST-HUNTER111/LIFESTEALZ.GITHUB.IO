@@ -6,11 +6,9 @@
 <title>Lifestealz SMP</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
-
 <link rel="icon" type="image/x-icon" href="favicon.ico">
-  
-<style>
 
+<style>
 *{
   margin:0;
   padding:0;
@@ -21,30 +19,27 @@
 body{
   background:#0f1115;
   color:white;
-  overflow:hidden; /* prevents scrolling on all devices */
+  overflow:hidden;
 }
 
-/* INTERACTIVE MOUSE-TRACKING GRADIENT */
+/* interactive bg */
 body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: -1;
-
-  background: radial-gradient(
-    circle at var(--x, 50%) var(--y, 50%),
-    rgba(61, 169, 255, 0.55),
-    rgba(0, 255, 178, 0.45),
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:-1;
+  background:radial-gradient(
+    circle at var(--x,50%) var(--y,50%),
+    rgba(61,169,255,0.55),
+    rgba(0,255,178,0.45),
     transparent 60%
   );
-
-  filter: blur(90px);
-  transition: background-position 0.15s ease-out;
+  filter:blur(90px);
+  transition:background-position .15s ease-out;
 }
 
 /* HEADER */
-
 header{
   display:flex;
   justify-content:space-between;
@@ -59,10 +54,11 @@ header{
   color:#3da9ff;
 }
 
-/* DESKTOP NAV */
+/* nav */
 nav{
   display:flex;
   gap:25px;
+  align-items:center;
 }
 
 nav a{
@@ -76,7 +72,35 @@ nav a:hover{
   color:white;
 }
 
-/* MOBILE MENU BUTTON */
+/* auth buttons / username */
+#authButtons{
+  display:flex;
+  gap:10px;
+}
+
+.auth-btn{
+  padding:6px 14px;
+  border-radius:6px;
+  border:1px solid #3da9ff;
+  background:transparent;
+  color:#3da9ff;
+  font-size:13px;
+  font-weight:600;
+  cursor:pointer;
+}
+
+.auth-btn:hover{
+  background:#3da9ff;
+  color:white;
+}
+
+#usernameDisplay{
+  font-weight:600;
+  color:#fff;
+  display:none;
+}
+
+/* mobile menu */
 .menu-btn{
   display:none;
   font-size:28px;
@@ -84,7 +108,6 @@ nav a:hover{
   color:white;
 }
 
-/* MOBILE NAV (hidden by default) */
 .mobile-nav{
   display:none;
   flex-direction:column;
@@ -109,9 +132,8 @@ nav a:hover{
 }
 
 /* HERO */
-
 .hero{
-  height:calc(100vh - 120px); /* fills screen minus header/footer */
+  height:calc(100vh - 120px);
   display:flex;
   flex-direction:column;
   align-items:center;
@@ -134,7 +156,6 @@ nav a:hover{
 }
 
 /* BUTTONS */
-
 .buttons{
   display:flex;
   gap:15px;
@@ -170,7 +191,6 @@ nav a:hover{
 }
 
 /* FOOTER */
-
 footer{
   text-align:center;
   padding:20px;
@@ -178,414 +198,379 @@ footer{
   font-size:14px;
 }
 
-/* ----------------------------- */
-/* 📱 MOBILE RESPONSIVE SECTION */
-/* ----------------------------- */
-
-@media (max-width: 768px){
-
-  header{
-    padding:20px 6%;
-  }
-
-  nav{
-    display:none; /* hide desktop nav */
-  }
-
-  .menu-btn{
-    display:block; /* show hamburger */
-  }
-
-  .hero h1{
-    font-size:36px;
-  }
-
-  .hero p{
-    font-size:15px;
-    padding:0 10px;
-  }
-
-  .btn{
-    padding:16px 32px;
-    font-size:16px;
-  }
-}
-
-@media (max-width: 480px){
-
-  .hero h1{
-    font-size:30px;
-  }
-
-  .hero p{
-    font-size:14px;
-  }
-
-  .btn{
-    width:100%;
-    text-align:center;
-  }
-}
-
-</style>
-</head>
-
-<body>
-
-<header>
-
-<div class="logo">LIFESTEALZ</div>
-
-<div class="menu-btn" onclick="toggleMenu()">☰</div>
-
-<nav>
-  <a href="index.html">Home</a>
-  <a href="rules.html">Rules</a>
-  <a href="forms.html">Forms</a>
-</nav>
-
-<div class="mobile-nav" id="mobileNav">
-  <a href="index.html">Home</a>
-  <a href="rules.html">Rules</a>
-  <a href="forms.html">Forms</a>
-</div>
-
-</header>
-
-<section class="hero">
-
-<h1>Lifestealz SMP</h1>
-
-<p>
-The ultimate Minecraft Lifesteal experience.
-Fight players, steal hearts, build alliances, and dominate the server.
-Only the strongest survive.
-</p>
-
-<div class="buttons">
-  <a class="btn primary" href="rules.html">Rules</a>
-  <a class="btn secondary" href="forms.html">Form</a>
-</div>
-
-</section>
-
-<footer>
-© 2026 Lifestealz SMP
-</footer>
-
-<!-- MOUSE TRACKING SCRIPT -->
-<script>
-document.addEventListener("mousemove", (e) => {
-  const x = (e.clientX / window.innerWidth) * 100;
-  const y = (e.clientY / window.innerHeight) * 100;
-
-  document.body.style.setProperty("--x", x + "%");
-  document.body.style.setProperty("--y", y + "%");
-});
-
-document.addEventListener("mouseleave", () => {
-  document.body.style.setProperty("--x", "50%");
-  document.body.style.setProperty("--y", "50%");
-});
-
-/* MOBILE MENU TOGGLE */
-function toggleMenu(){
-  const nav = document.getElementById("mobileNav");
-  nav.style.display = nav.style.display === "flex" ? "none" : "flex";
-}
-</script>
-
-</body>
-</html>nav a{
-  text-decoration:none;
-  color:#aaa;
-  font-weight:600;
-  transition:.2s;
-}
-
-nav a:hover{
-  color:white;
-}
-
-/* MOBILE MENU BUTTON */
-.menu-btn{
+/* MODAL */
+.modal-backdrop{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.6);
   display:none;
-  font-size:28px;
-  cursor:pointer;
-  color:white;
-}
-
-/* MOBILE NAV (hidden by default) */
-.mobile-nav{
-  display:none;
-  flex-direction:column;
-  background:#151922;
-  padding:20px;
-  position:absolute;
-  top:80px;
-  right:8%;
-  width:200px;
-  border-radius:10px;
-}
-
-.mobile-nav a{
-  padding:10px 0;
-  color:#ccc;
-  text-decoration:none;
-  font-weight:600;
-}
-
-.mobile-nav a:hover{
-  color:white;
-}
-
-/* HERO */
-
-.hero{
-  height:80vh;
-  display:flex;
-  flex-direction:column;
   align-items:center;
   justify-content:center;
-  text-align:center;
-  padding:20px;
+  z-index:50;
 }
 
-.hero h1{
-  font-size:60px;
-  font-weight:800;
-  margin-bottom:15px;
-}
-
-.hero p{
-  max-width:650px;
-  color:#bbb;
-  line-height:1.6;
-  margin-bottom:30px;
-}
-
-/* BUTTONS */
-
-.buttons{
-  display:flex;
-  gap:15px;
-  flex-wrap:wrap;
-  justify-content:center;
-}
-
-.btn{
-  padding:14px 28px;
-  border-radius:8px;
-  font-weight:600;
-  text-decoration:none;
-  transition:.2s;
-}
-
-.primary{
-  background:#3da9ff;
-  color:white;
-}
-
-.primary:hover{
-  background:#2c8ce0;
-}
-
-.secondary{
-  border:2px solid #3da9ff;
-  color:#3da9ff;
-}
-
-.secondary:hover{
-  background:#3da9ff;
-  color:white;
-}
-
-/* FEATURES */
-
-.features{
-  padding:80px 10%;
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-  gap:30px;
-}
-
-.feature{
+.modal{
   background:#151922;
-  padding:30px;
+  padding:25px 25px 20px;
   border-radius:10px;
-  transition:.2s;
+  width:320px;
+  max-width:90%;
 }
 
-.feature:hover{
-  transform:translateY(-5px);
-}
-
-.feature h3{
+.modal h2{
   margin-bottom:10px;
 }
 
-.feature p{
-  color:#aaa;
-  font-size:14px;
+.modal-tabs{
+  display:flex;
+  margin-bottom:15px;
+  border-bottom:1px solid #333;
 }
 
-/* FOOTER */
-
-footer{
+.modal-tab{
+  flex:1;
   text-align:center;
-  padding:40px;
-  color:#777;
+  padding:8px 0;
+  cursor:pointer;
   font-size:14px;
+  color:#aaa;
 }
 
-/* ----------------------------- */
-/* 📱 MOBILE RESPONSIVE SECTION */
-/* ----------------------------- */
+.modal-tab.active{
+  color:#3da9ff;
+  border-bottom:2px solid #3da9ff;
+}
 
-@media (max-width: 768px){
+.modal form{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
 
+.modal input{
+  padding:8px 10px;
+  border-radius:6px;
+  border:1px solid #333;
+  background:#0f1115;
+  color:white;
+  font-size:13px;
+}
+
+.modal button{
+  margin-top:5px;
+  padding:10px;
+  border-radius:6px;
+  border:none;
+  background:#3da9ff;
+  color:white;
+  font-weight:600;
+  cursor:pointer;
+}
+
+.modal button:hover{
+  background:#2c8ce0;
+}
+
+.modal .close-btn{
+  margin-top:10px;
+  background:transparent;
+  border:1px solid #555;
+  color:#ccc;
+}
+
+/* responsive */
+@media (max-width:768px){
   header{
     padding:20px 6%;
   }
-
   nav{
-    display:none; /* hide desktop nav */
+    display:none;
   }
-
   .menu-btn{
-    display:block; /* show hamburger */
+    display:block;
   }
-
   .hero h1{
     font-size:36px;
   }
-
   .hero p{
     font-size:15px;
     padding:0 10px;
   }
-
   .btn{
     padding:16px 32px;
     font-size:16px;
   }
-
-  .features{
-    padding:50px 6%;
-  }
 }
 
-@media (max-width: 480px){
-
+@media (max-width:480px){
   .hero h1{
     font-size:30px;
   }
-
   .hero p{
     font-size:14px;
   }
-
   .btn{
     width:100%;
     text-align:center;
   }
-
-  .feature{
-    padding:20px;
-  }
 }
-
 </style>
 </head>
-
 <body>
 
 <header>
+  <div class="logo">LIFESTEALZ</div>
 
-<div class="logo">LIFESTEALZ</div>
+  <div class="menu-btn" onclick="toggleMenu()">☰</div>
 
-<div class="menu-btn" onclick="toggleMenu()">☰</div>
+  <nav id="desktopNav">
+    <a href="index.html">Home</a>
+    <a href="rules.html">Rules</a>
+    <a href="forms.html">Forms</a>
+    <!-- setup link appears only when logged in -->
+    <a href="setup.html" id="setupLink" style="display:none;">Setup</a>
+    <span id="usernameDisplay"></span>
+    <div id="authButtons">
+      <button class="auth-btn" onclick="openAuthModal('login')">Login</button>
+      <button class="auth-btn" onclick="openAuthModal('signup')">Sign up</button>
+    </div>
+  </nav>
 
-<nav>
-  <a href="index.html">Home</a>
-  <a href="rules.html">Rules</a>
-  <a href="forms.html">Forms</a>
-</nav>
-
-<div class="mobile-nav" id="mobileNav">
-  <a href="index.html">Home</a>
-  <a href="rules.html">Rules</a>
-  <a href="forms.html">Forms</a>
-</div>
-
+  <div class="mobile-nav" id="mobileNav">
+    <a href="index.html">Home</a>
+    <a href="rules.html">Rules</a>
+    <a href="forms.html">Forms</a>
+    <a href="setup.html" id="setupLinkMobile" style="display:none;">Setup</a>
+  </div>
 </header>
 
 <section class="hero">
+  <h1>Lifestealz SMP</h1>
+  <p>
+    The ultimate Minecraft Lifesteal experience.
+    Fight players, steal hearts, build alliances, and dominate the server.
+    Only the strongest survive.
+  </p>
 
-<h1>Lifestealz SMP</h1>
-
-<p>
-The ultimate Minecraft Lifesteal experience.
-Fight players, steal hearts, build alliances, and dominate the server.
-Only the strongest survive.
-</p>
-
-<div class="buttons">
-  <a class="btn primary" href="rules.html">Rules</a>
-  <a class="btn secondary" href="forms.html">Form</a>
-</div>
-
-</section>
-
-<section class="features">
-
-<div class="feature">
-  <h3>Lifesteal PvP</h3>
-  <p>Eliminate players to steal their hearts and become stronger.</p>
-</div>
-
-<div class="feature">
-  <h3>Active Community</h3>
-  <p>Play with a competitive and active community every day.</p>
-</div>
-
-<div class="feature">
-  <h3>Custom Features</h3>
-  <p>Unique plugins and balanced gameplay designed for competitive players.</p>
-</div>
-
-<div class="feature">
-  <h3>Events</h3>
-  <p>Frequent server events and competitions with rewards.</p>
-</div>
-
+  <div class="buttons">
+    <a class="btn primary" href="rules.html">Rules</a>
+    <a class="btn secondary" href="forms.html">Form</a>
+  </div>
 </section>
 
 <footer>
-© 2026 Lifestealz SMP
+  © 2026 Lifestealz SMP
 </footer>
 
-<!-- MOUSE TRACKING SCRIPT -->
+<!-- AUTH MODAL -->
+<div class="modal-backdrop" id="authModalBackdrop">
+  <div class="modal">
+    <h2 id="modalTitle">Login</h2>
+
+    <div class="modal-tabs">
+      <div class="modal-tab active" id="loginTab" onclick="switchAuthTab('login')">Login</div>
+      <div class="modal-tab" id="signupTab" onclick="switchAuthTab('signup')">Sign up</div>
+    </div>
+
+    <!-- LOGIN FORM -->
+    <form id="loginForm">
+      <input type="email" id="loginEmail" placeholder="Email" required>
+      <input type="password" id="loginPassword" placeholder="Password" required>
+      <button type="submit">Login</button>
+      <button type="button" class="close-btn" onclick="closeAuthModal()">Close</button>
+    </form>
+
+    <!-- SIGNUP FORM -->
+    <form id="signupForm" style="display:none;">
+      <input type="email" id="signupEmail" placeholder="Email" required>
+      <input type="password" id="signupPassword" placeholder="Password" required>
+      <input type="text" id="signupPermissionCode" placeholder="Permission code" required>
+      <button type="submit">Create account</button>
+      <button type="button" class="close-btn" onclick="closeAuthModal()">Close</button>
+      <p style="margin-top:6px;font-size:11px;color:#888;">
+        You’ll get a verification email. Click the link, then reopen the site.
+      </p>
+    </form>
+  </div>
+</div>
+
+<!-- Firebase + app script -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+
 <script>
-document.addEventListener("mousemove", (e) => {
-  const x = (e.clientX / window.innerWidth) * 100;
-  const y = (e.clientY / window.innerHeight) * 100;
-
-  document.body.style.setProperty("--x", x + "%");
-  document.body.style.setProperty("--y", y + "%");
+// mouse bg
+document.addEventListener("mousemove",(e)=>{
+  const x=(e.clientX/window.innerWidth)*100;
+  const y=(e.clientY/window.innerHeight)*100;
+  document.body.style.setProperty("--x",x+"%");
+  document.body.style.setProperty("--y",y+"%");
+});
+document.addEventListener("mouseleave",()=>{
+  document.body.style.setProperty("--x","50%");
+  document.body.style.setProperty("--y","50%");
 });
 
-document.addEventListener("mouseleave", () => {
-  document.body.style.setProperty("--x", "50%");
-  document.body.style.setProperty("--y", "50%");
-});
-
-/* MOBILE MENU TOGGLE */
+// mobile menu
 function toggleMenu(){
-  const nav = document.getElementById("mobileNav");
-  nav.style.display = nav.style.display === "flex" ? "none" : "flex";
+  const nav=document.getElementById("mobileNav");
+  nav.style.display = nav.style.display==="flex" ? "none" : "flex";
 }
-</script>
 
+// ---------- AUTH MODAL ----------
+const authModalBackdrop = document.getElementById("authModalBackdrop");
+const loginForm = document.getElementById("loginForm");
+const signupForm = document.getElementById("signupForm");
+const loginTab = document.getElementById("loginTab");
+const signupTab = document.getElementById("signupTab");
+const modalTitle = document.getElementById("modalTitle");
+
+function openAuthModal(mode){
+  authModalBackdrop.style.display="flex";
+  switchAuthTab(mode);
+}
+
+function closeAuthModal(){
+  authModalBackdrop.style.display="none";
+}
+
+function switchAuthTab(mode){
+  if(mode==="login"){
+    loginTab.classList.add("active");
+    signupTab.classList.remove("active");
+    loginForm.style.display="flex";
+    signupForm.style.display="none";
+    modalTitle.textContent="Login";
+  }else{
+    signupTab.classList.add("active");
+    loginTab.classList.remove("active");
+    signupForm.style.display="flex";
+    loginForm.style.display="none";
+    modalTitle.textContent="Sign up";
+  }
+}
+
+// ---------- PERMISSION CODES (one-time, client-side) ----------
+let permissionCodes = [
+  "CODE-1-ABC123",
+  "CODE-2-XYZ789",
+  "CODE-3-FOO111",
+  "CODE-4-BAR222",
+  "CODE-5-BAZ333",
+  "CODE-6-AAA444",
+  "CODE-7-BBB555",
+  "CODE-8-CCC666",
+  "CODE-9-DDD777",
+  "CODE-10-EEE888",
+  "CODE-11-FFF999",
+  "CODE-12-GGG000",
+  "CODE-13-HHH123",
+  "CODE-14-III234",
+  "CODE-15-JJJ345",
+  "CODE-16-KKK456",
+  "CODE-17-LLL567",
+  "CODE-18-MMM678",
+  "CODE-19-NNN789",
+  "CODE-20-OOO890"
+];
+
+// mark used codes in localStorage
+function isCodeAvailable(code){
+  const used = JSON.parse(localStorage.getItem("usedPermissionCodes") || "[]");
+  return permissionCodes.includes(code) && !used.includes(code);
+}
+
+function markCodeUsed(code){
+  const used = JSON.parse(localStorage.getItem("usedPermissionCodes") || "[]");
+  if(!used.includes(code)){
+    used.push(code);
+    localStorage.setItem("usedPermissionCodes", JSON.stringify(used));
+  }
+}
+
+// ---------- FIREBASE ----------
+const firebaseConfig = {
+  apiKey: "AIzaSyD4xpW811BTN2VDPIJyMMzdHI1lFBF8bxI",
+  authDomain: "lifestealz.firebaseapp.com",
+  projectId: "lifestealz",
+  appId: "1:947239348718:web:2b56d45ddbda32471fc6ff"
+};
+
+firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
+
+// UI elements
+const authButtons = document.getElementById("authButtons");
+const usernameDisplay = document.getElementById("usernameDisplay");
+const setupLink = document.getElementById("setupLink");
+const setupLinkMobile = document.getElementById("setupLinkMobile");
+
+// derive username from email
+function nameFromEmail(email){
+  if(!email) return "";
+  return email.split("@")[0];
+}
+
+// auth state listener
+auth.onAuthStateChanged(user=>{
+  if(user && user.emailVerified){
+    const name = nameFromEmail(user.email);
+    usernameDisplay.textContent = name;
+    usernameDisplay.style.display = "inline-block";
+    authButtons.style.display = "none";
+    setupLink.style.display = "inline-block";
+    setupLinkMobile.style.display = "block";
+  }else{
+    usernameDisplay.style.display = "none";
+    authButtons.style.display = "flex";
+    setupLink.style.display = "none";
+    setupLinkMobile.style.display = "none";
+  }
+});
+
+// signup
+signupForm.addEventListener("submit", async (e)=>{
+  e.preventDefault();
+  const email = document.getElementById("signupEmail").value.trim();
+  const password = document.getElementById("signupPassword").value;
+  const code = document.getElementById("signupPermissionCode").value.trim();
+
+  if(!isCodeAvailable(code)){
+    alert("Invalid or already used permission code.");
+    return;
+  }
+
+  try{
+    const cred = await auth.createUserWithEmailAndPassword(email, password);
+    await cred.user.sendEmailVerification();
+    markCodeUsed(code);
+    alert("Account created! Check your email and click the verification link, then reopen the site.");
+    closeAuthModal();
+  }catch(err){
+    console.error(err);
+    alert("Signup error: " + err.message);
+  }
+});
+
+// login
+loginForm.addEventListener("submit", async (e)=>{
+  e.preventDefault();
+  const email = document.getElementById("loginEmail").value.trim();
+  const password = document.getElementById("loginPassword").value;
+
+  try{
+    const cred = await auth.signInWithEmailAndPassword(email, password);
+    if(!cred.user.emailVerified){
+      alert("Please verify your email first (check your inbox).");
+      await auth.signOut();
+      return;
+    }
+    closeAuthModal();
+  }catch(err){
+    console.error(err);
+    alert("Login error: " + err.message);
+  }
+});
+</script>
 </body>
 </html>
