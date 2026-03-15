@@ -533,7 +533,7 @@ signupForm.addEventListener("submit", async (e)=>{
   const code = document.getElementById("signupPermissionCode").value.trim();
 
   try {
-    const codeRef = db.ref("permissionCodes/" + code);
+    const codeRef = db.ref(code);
     const snap = await codeRef.get();
 
     if (!snap.exists()) {
