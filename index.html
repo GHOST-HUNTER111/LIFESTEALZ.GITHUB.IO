@@ -116,8 +116,9 @@ nav a:hover{
   position:absolute;
   top:80px;
   right:8%;
-  width:200px;
+  width:220px;
   border-radius:10px;
+  z-index:20;
 }
 
 .mobile-nav a{
@@ -327,8 +328,8 @@ footer{
     <a href="index.html">Home</a>
     <a href="rules.html">Rules</a>
     <a href="forms.html">Forms</a>
-    <!-- setup link appears only when logged in -->
     <a href="setup.html" id="setupLink" style="display:none;">Setup</a>
+
     <span id="usernameDisplay"></span>
     <div id="authButtons">
       <button class="auth-btn" onclick="openAuthModal('login')">Login</button>
@@ -341,6 +342,14 @@ footer{
     <a href="rules.html">Rules</a>
     <a href="forms.html">Forms</a>
     <a href="setup.html" id="setupLinkMobile" style="display:none;">Setup</a>
+
+    <div id="mobileAuthArea" style="margin-top:10px;">
+      <span id="usernameDisplayMobile" style="display:none;font-weight:600;"></span>
+      <div id="authButtonsMobile" style="display:flex;gap:8px;margin-top:8px;">
+        <button class="auth-btn" onclick="openAuthModal('login')">Login</button>
+        <button class="auth-btn" onclick="openAuthModal('signup')">Sign up</button>
+      </div>
+    </div>
   </div>
 </header>
 
@@ -388,7 +397,7 @@ footer{
       <button type="submit">Create account</button>
       <button type="button" class="close-btn" onclick="closeAuthModal()">Close</button>
       <p style="margin-top:6px;font-size:11px;color:#888;">
-        You’ll get a verification email. Click the link, then reopen the site.
+        You’ll get a verification email. Click the link, then log in.
       </p>
     </form>
   </div>
@@ -397,6 +406,7 @@ footer{
 <!-- Firebase + app script -->
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
 
 <script>
 // mouse bg
@@ -450,54 +460,18 @@ function switchAuthTab(mode){
   }
 }
 
-// ---------- PERMISSION CODES (one-time, client-side) ----------
-let permissionCodes = [
-  "CODE-1-ABC123",
-  "CODE-2-XYZ789",
-  "CODE-3-FOO111",
-  "CODE-4-BAR222",
-  "CODE-5-BAZ333",
-  "CODE-6-AAA444",
-  "CODE-7-BBB555",
-  "CODE-8-CCC666",
-  "CODE-9-DDD777",
-  "CODE-10-EEE888",
-  "CODE-11-FFF999",
-  "CODE-12-GGG000",
-  "CODE-13-HHH123",
-  "CODE-14-III234",
-  "CODE-15-JJJ345",
-  "CODE-16-KKK456",
-  "CODE-17-LLL567",
-  "CODE-18-MMM678",
-  "CODE-19-NNN789",
-  "CODE-20-OOO890"
-];
-
-// mark used codes in localStorage
-function isCodeAvailable(code){
-  const used = JSON.parse(localStorage.getItem("usedPermissionCodes") || "[]");
-  return permissionCodes.includes(code) && !used.includes(code);
-}
-
-function markCodeUsed(code){
-  const used = JSON.parse(localStorage.getItem("usedPermissionCodes") || "[]");
-  if(!used.includes(code)){
-    used.push(code);
-    localStorage.setItem("usedPermissionCodes", JSON.stringify(used));
-  }
-}
-
 // ---------- FIREBASE ----------
 const firebaseConfig = {
-  apiKey: "AIzaSyD4xpW811BTN2VDPIJyMMzdHI1lFBF8bxI",
-  authDomain: "lifestealz.firebaseapp.com",
-  projectId: "lifestealz",
-  appId: "1:947239348718:web:2b56d45ddbda32471fc6ff"
+  apiKey: "YOUR_API_KEY",
+  authDomain: "YOUR_PROJECT.firebaseapp.com",
+  projectId: "YOUR_PROJECT_ID",
+  appId: "YOUR_APP_ID",
+  databaseURL: "https://YOUR_PROJECT_ID-default-rtdb.firebaseio.com"
 };
 
 firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
+const db = firebase.database();
 
 // UI elements
 const authButtons = document.getElementById("authButtons");
@@ -505,48 +479,82 @@ const usernameDisplay = document.getElementById("usernameDisplay");
 const setupLink = document.getElementById("setupLink");
 const setupLinkMobile = document.getElementById("setupLinkMobile");
 
-// derive username from email
+const usernameDisplayMobile = document.getElementById("usernameDisplayMobile");
+const authButtonsMobile = document.getElementById("authButtonsMobile");
+
 function nameFromEmail(email){
   if(!email) return "";
   return email.split("@")[0];
 }
 
 // auth state listener
-auth.onAuthStateChanged(user=>{
-  if(user && user.emailVerified){
-    const name = nameFromEmail(user.email);
-    usernameDisplay.textContent = name;
-    usernameDisplay.style.display = "inline-block";
-    authButtons.style.display = "none";
-    setupLink.style.display = "inline-block";
-    setupLinkMobile.style.display = "block";
+auth.onAuthStateChanged(async (user)=>{
+  if(user){
+    await user.reload();
+    if(user.emailVerified){
+      const name = nameFromEmail(user.email);
+
+      // desktop
+      usernameDisplay.textContent = name;
+      usernameDisplay.style.display = "inline-block";
+      authButtons.style.display = "none";
+      setupLink.style.display = "inline-block";
+
+      // mobile
+      usernameDisplayMobile.textContent = name;
+      usernameDisplayMobile.style.display = "inline-block";
+      authButtonsMobile.style.display = "none";
+      setupLinkMobile.style.display = "block";
+    }else{
+      usernameDisplay.style.display = "none";
+      authButtons.style.display = "flex";
+      setupLink.style.display = "none";
+
+      usernameDisplayMobile.style.display = "none";
+      authButtonsMobile.style.display = "flex";
+      setupLinkMobile.style.display = "none";
+    }
   }else{
     usernameDisplay.style.display = "none";
     authButtons.style.display = "flex";
     setupLink.style.display = "none";
+
+    usernameDisplayMobile.style.display = "none";
+    authButtonsMobile.style.display = "flex";
     setupLinkMobile.style.display = "none";
   }
 });
 
-// signup
+// signup with permission code (boolean value)
 signupForm.addEventListener("submit", async (e)=>{
   e.preventDefault();
   const email = document.getElementById("signupEmail").value.trim();
   const password = document.getElementById("signupPassword").value;
   const code = document.getElementById("signupPermissionCode").value.trim();
 
-  if(!isCodeAvailable(code)){
-    alert("Invalid or already used permission code.");
-    return;
-  }
+  try {
+    const codeRef = db.ref("permissionCodes/" + code);
+    const snap = await codeRef.get();
 
-  try{
+    if (!snap.exists()) {
+      alert("Invalid permission code.");
+      return;
+    }
+
+    const used = snap.val();
+    if (used === true) {
+      alert("This permission code has already been used.");
+      return;
+    }
+
     const cred = await auth.createUserWithEmailAndPassword(email, password);
     await cred.user.sendEmailVerification();
-    markCodeUsed(code);
-    alert("Account created! Check your email and click the verification link, then reopen the site.");
+
+    await codeRef.set(true);
+
+    alert("Account created! Check your email and click the verification link, then log in.");
     closeAuthModal();
-  }catch(err){
+  } catch (err) {
     console.error(err);
     alert("Signup error: " + err.message);
   }
@@ -566,6 +574,7 @@ loginForm.addEventListener("submit", async (e)=>{
       return;
     }
     closeAuthModal();
+    window.location.reload();
   }catch(err){
     console.error(err);
     alert("Login error: " + err.message);
