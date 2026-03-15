@@ -533,6 +533,7 @@ signupForm.addEventListener("submit", async (e)=>{
   const code = document.getElementById("signupPermissionCode").value.trim();
 
   try {
+    // your codes are at the ROOT, so reference root
     const codeRef = db.ref(code);
     const snap = await codeRef.get();
 
@@ -559,6 +560,7 @@ signupForm.addEventListener("submit", async (e)=>{
     alert("Signup error: " + err.message);
   }
 });
+
 
 // login
 loginForm.addEventListener("submit", async (e)=>{
